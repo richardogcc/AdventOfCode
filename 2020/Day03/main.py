@@ -31,13 +31,13 @@ def counter(rawInput, in_down, in_right):
     # print('\n\n\nDown: {}\nTrees: {}'.format(down, trees))
     return trees
 
+rawInput = readFromFile('input.txt')
 
-c1 = counter(readFromFile('input.txt'), 1, 3)
+c1 = counter(rawInput, 1, 3)
 print('Result parte one: ' + str(c1))
 
-c1 = c1 * counter(readFromFile('input.txt'), 1, 1)
-c1 = c1 * counter(readFromFile('input.txt'), 1, 5)
-c1 = c1 * counter(readFromFile('input.txt'), 1, 7)
-c1 = c1 * counter(readFromFile('input.txt'), 2, 1)
-
+c1 = c1 * counter(rawInput, 1, 1)
+c1 = c1 * counter(rawInput, 1, 5)
+c1 = c1 * counter(rawInput, 1, 7)
+c1 = c1 * counter(rawInput, 2, 1)
 print('Final result: ' + str(c1))
