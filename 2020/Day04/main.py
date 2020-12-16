@@ -29,12 +29,14 @@ def listOfObjects(string):
             lofobj.append(created)
     return lofobj
 
-
+isV = None
 validPassport = 0
 for entry in listOfObjects(formated):
     v = ['byr', 'iyr', 'eyr', 'hgt', 'hcl', 'ecl', 'pid']
     isValid = v[0] in entry and v[1] in entry and v[2] in entry and v[3] in entry and v[4] in entry and v[5] in entry and v[6] in entry
+
     if isValid:
         validPassport += 1
 
+print(isV)
 print(validPassport)
