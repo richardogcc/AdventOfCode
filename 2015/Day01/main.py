@@ -4,8 +4,6 @@
 def readFromFile(pathFile):
     return (open(pathFile, 'r').read())
 
-fileInput = readFromFile('./input.txt')
-
 def evaluate(raw):
     level = 0
 
