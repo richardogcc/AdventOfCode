@@ -1,36 +1,34 @@
 const fs = require('fs');
 
-const day1Input = './input.txt';
+const input = './input.txt';
 const fileRead = (fileName) => (fs.readFileSync(fileName)).toString();
-const depths = (fileRead(day1Input)).split('\n').map(str => parseInt(str));
+const cmd = (fileRead(input)).split('\n');
 
-function countDepths(depth){
-    if(!Array.isArray(depth)) return -1;
-    let acc = 0;
+function finalResult (part, cmd){
+    let axis = { horizontal: 0, depth: 0, aim: 0 /* aim: second part */ };
 
-    depth.forEach( (d, i) => {
-        if(i != 0) {
-            if(d > depth[i-1]) acc++;
+    cmd.forEach(command => {
+        if(!command.includes(' ')) return;
+        const [nameCMD, value] = [command.split(' ')[0], parseInt(command.split(' ')[1])];
+        if(!nameCMD || !value) return;
+
+        if(part){
+            if(nameCMD === 'forward') axis.horizontal += value;
+            if(nameCMD === 'down') axis.depth += value;
+            if(nameCMD === 'up') axis.depth -= value;
+        }
+        if(!part){
+            if(nameCMD === 'forward') axis.horizontal += value, axis.depth += (axis.aim * value);
+            if(nameCMD === 'down') axis.aim += value;
+            if(nameCMD === 'up') axis.aim -= value;
         }
     });
 
-    return acc;
+    return axis.horizontal * axis.depth;
 }
 
-function sumDepthsAndCount(depth){
-    if(!Array.isArray(depth)) return -1;
-    let sum = []; 
+// Answer first part: 1427868
+console.log(finalResult(true, cmd));
 
-    depth.forEach( (d, i) => {
-        if(i+1 > depth.length) return;
-        if(i != 0) sum.push(depth[i-1] + d + depth[i+1]);
-    });
-    
-    return countDepths(sum);
-}
-
-//First part answer
-console.log(countDepths(depths));
-
-//Second part answer
-console.log(sumDepthsAndCount(depths));
+// Answer second part: 1568138742
+console.log(finalResult(false, cmd));
