@@ -1,8 +1,8 @@
 const fs = require('fs');
 
-const input = './input.txt';
+const day1Input = './input.txt';
 const fileRead = (fileName) => (fs.readFileSync(fileName)).toString();
-const depths = (fileRead(input)).split('\n').map(str => parseInt(str));
+const depths = (fileRead(day1Input)).split('\n').map(str => parseInt(str));
 
 function countDepths(depth){
     if(!Array.isArray(depth)) return -1;
