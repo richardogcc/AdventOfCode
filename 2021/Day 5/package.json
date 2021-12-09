@@ -1,0 +1,21 @@
+{
+  "name": "day-5",
+  "version": "1.0.0",
+  "description": "Day 5 of AOC",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "keywords": [
+    "AdventOfCode",
+    "programming",
+    "train",
+    "brain"
+  ],
+  "author": "Richardo G. Cibea",
+  "license": "GPL",
+  "dependencies": {
+    "assert": "^2.0.0",
+    "fs": "^0.0.1-security"
+  }
+}
