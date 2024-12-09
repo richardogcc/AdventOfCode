@@ -24,6 +24,27 @@ const print = (txt) => console.log(txt);
 //     return true;
 // }
 
+
+function isUpOrDown(arr) {
+    if (arr.length < 2) return true;
+
+    let ascending = true;
+    let descending = true;
+
+    for (let i = 1; i < arr.length; i++) {
+        const diff = Math.abs(arr[i] - arr[i - 1]);
+        if (diff < 1 || diff > 3) {
+            ascending = false;
+            descending = false;
+            break;
+        }
+        if (arr[i] < arr[i - 1]) ascending = false;
+        if (arr[i] > arr[i - 1]) descending = false;
+    }
+
+    return ascending || descending;
+}
+
 function safety(arr, calledOnce = false) {
     console.log('Called once ', calledOnce);
     console.log('Array ', arr.join(' '));
@@ -39,17 +60,19 @@ function safety(arr, calledOnce = false) {
                 arr.splice(i + 1, 1);
                 return safety(arr, true);
             }
-            return [arr, false, `i: ${i} | Math.abs(${arr[i]} - ${arr[i + 1]}) = ${r}`];
+            // return [arr, false, `i: ${i} | Math.abs(${arr[i]} - ${arr[i + 1]}) = ${r}`];
+            return false;
         }
     }
 
     console.log('Reached end');
+    // return [arr, true];
     return [arr, true];
 }
 
 const lvls = read.map(x => x.split(' ').map(Number))
 // const a1 = lvls.filter(x => /*isUpOrDown(x) && */safety(x)).length
-const a1 = lvls.map(x => /*isUpOrDown(x) && */safety(x))
+const a1 = lvls.map(x => isUpOrDown(x) && safety(x))
 // Response 524
 print(a1)
 
