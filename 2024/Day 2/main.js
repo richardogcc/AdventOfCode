@@ -28,18 +28,19 @@ function safety(arr, calledOnce = false) {
     console.log('Called once ', calledOnce);
     console.log('Array ', arr.join(' '));
 
-    for(let i = 0; i < arr.length; i++){
-        if(!arr[i+1]) break;
-        console.log(`i: ${i} | Math.abs(${arr[i]} - ${arr[i+1]}) = ${Math.abs(arr[i] - arr[i+1])}`);
-        // const r = Math.abs(arr[i] - arr[i+1]);
-        const r = (arr[i] - arr[i+1]) < 0 ? (arr[i] - arr[i+1]) * -1 : arr[i] - arr[i+1];
+    for (let i = 0; i < arr.length; i++) {
+        if (!arr[i + 1]) break;
+        console.log(`i: ${i} | Math.abs(${arr[i]} - ${arr[i + 1]}) = ${Math.abs(arr[i] - arr[i + 1])}`);
+        const r = Math.abs(arr[i] - arr[i + 1]);
         console.log('R ', r);
 
-        if(r < 1 || r > 3 && calledOnce == false){
-            arr.splice(i+1, 1);
-            safety(arr, true);
+        if (r < 1 || r > 3) {
+            if (!calledOnce) {
+                arr.splice(i + 1, 1);
+                return safety(arr, true);
+            }
+            return [arr, false, `i: ${i} | Math.abs(${arr[i]} - ${arr[i + 1]}) = ${r}`];
         }
-        if(r < 1 || r > 3) return [arr, false, `i: ${i} | Math.abs(${arr[i]} - ${arr[i+1]}) = ${r}`];
     }
 
     console.log('Reached end');
